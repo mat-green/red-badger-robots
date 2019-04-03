@@ -20,3 +20,4 @@ class Robot(object):
         self.x = x
         self.y = y
         self.direction = direction
+        self.lost = False

@@ -16,7 +16,9 @@ def robot():
 
 @pytest.fixture
 def lost_robot():
-    return Robot(x=0, y=0, direction=LOST)
+    robot = Robot(x=0, y=0, direction=NORTH)
+    robot.lost = True
+    return robot
 
 
 def test_left_command(grid, robot):
@@ -40,7 +42,7 @@ def test_left_command_for_lost(grid, lost_robot):
     command.execute()
     assert lost_robot.x == 0
     assert lost_robot.y == 0
-    assert lost_robot.direction == LOST
+    assert lost_robot.direction == NORTH
 
 
 def test_right_command(grid, robot):
@@ -64,7 +66,7 @@ def test_right_command_for_lost(grid, lost_robot):
     command.execute()
     assert lost_robot.x == 0
     assert lost_robot.y == 0
-    assert lost_robot.direction == LOST
+    assert lost_robot.direction == NORTH
 
 
 def test_forward_command(grid, robot):

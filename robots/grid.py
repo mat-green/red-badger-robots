@@ -60,23 +60,25 @@ class Grid(object):
         else:
             return False
 
-    def check_for_lost_robot(self, robot):
+    def check_for_lost_robot(self, x, y):
         """Determines if a robot is lost at coordinates.
 
         Will add coordinates to scents
 
         Parameters
         ----------
-        robot: Robot
-            The instance of the robot to be checked against the grid size.
+        x: int
+            The x coordinate of the grid to be checked.
+        y: int
+            The y coordinate of the grid to be checked.
 
         Returns
         -------
         bool
             True if the robot is lost, False otherwise.
         """
-        if robot.x > self.width or robot.y > self.height:
-            self.scents.append((robot.x, robot.y))
+        if x > self.width or y > self.height:
+            self.scents.append((x, y))
             return True
         else:
             return False

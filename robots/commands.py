@@ -38,7 +38,7 @@ class Left(Command):
     """Represents the left rotation command."""
 
     def execute(self):
-        if self.robot.direction != LOST:
+        if not self.robot.lost:
             current_index = [i for i,_ in enumerate(self.compass) if _ == self.robot.direction][0]
             new_index = current_index - 1
             if new_index < 0:
@@ -49,7 +49,7 @@ class Right(Command):
     """Represents the right rotation command."""
 
     def execute(self):
-        if self.robot.direction != LOST:
+        if not self.robot.lost:
             current_index = [i for i,_ in enumerate(self.compass) if _ == self.robot.direction][0]
             new_index = current_index + 1
             if new_index >= len(self.compass):
@@ -72,7 +72,8 @@ class Forward(Command):
         new_x = self.robot.x + x
         new_y = self.robot.y + y
         if self.grid.check_for_scent(x=new_x, y=new_y) == False:
-            self.robot.x = new_x
-            self.robot.y = new_y
-            if self.grid.check_for_lost_robot(self.robot):
-                self.robot.direction = LOST
+            if self.grid.check_for_lost_robot(x=new_x, y=new_y):
+                self.robot.lost = True
+            else:
+                self.robot.x = new_x
+                self.robot.y = new_y
