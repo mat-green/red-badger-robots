@@ -31,3 +31,13 @@ This assumes you are in the root of the application folder using cli:
 python3 setup.py develop
 pytest
 ```
+
+### Execution: Application
+This assumes you are in the root of the application folder using cli:
+```bash
+python3 setup.py develop
+python robots/main.py --file data/sample.txt
+```
+
+## Assumptions
+* All coordinates are x,y and width,height.
