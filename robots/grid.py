@@ -36,3 +36,26 @@ class Grid(object):
             raise InputException(self.width, "Width must be less than 50")
         if self.height > 50:
             raise InputException(self.height, "Height must be less than 50")
+        self.scents = []  # no scents detected.
+
+    def check_for_scent(self, x, y):
+        """Determines if a robot has already been lost at coordinates.
+        Parameters
+        ----------
+        x: int
+            The x coordinate of the grid to be checked.
+        y: int
+            The y coordinate of the grid to be checked.
+
+        Returns
+        -------
+        bool
+            True if a scent is detected, False otherwise.
+        """
+        if len(self.scents) == 0:
+            return False
+        scent_found = [tup for tup in self.scents if tup[0] == x and tup[1] == y]
+        if scent_found:
+            return True
+        else:
+            return False
