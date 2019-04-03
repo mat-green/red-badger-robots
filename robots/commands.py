@@ -58,4 +58,17 @@ class Forward(Command):
     """Represents the forward rotation command."""
 
     def execute(self):
-        pass
+        def move(direction):
+            return {
+                NORTH: (0, 1),
+                EAST: (1, 0),
+                SOUTH: (0, -1),
+                WEST: (-1, 0),
+            }.get(direction, (0, 0))
+        x, y = move(self.robot.direction)
+        new_x = self.robot.x + x
+        new_y = self.robot.y + y
+        # TODO: grid check
+        self.robot.x = new_x
+        self.robot.y = new_y
+        # TODO: is robot lost?

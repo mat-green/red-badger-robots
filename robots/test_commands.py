@@ -43,3 +43,28 @@ def test_right_command(grid, robot):
     assert robot.direction == WEST
     command.execute()
     assert robot.direction == NORTH
+
+def test_forward_command(grid, robot):
+    """Checks the right command rotates correctly."""
+
+    command = Forward(grid=grid, robot=robot)
+    command.execute()
+    assert robot.x == 0
+    assert robot.y == 1
+    assert robot.direction == NORTH
+    right_command = Right(grid=grid, robot=robot)
+    right_command.execute()
+    command.execute()
+    assert robot.x == 1
+    assert robot.y == 1
+    assert robot.direction == EAST
+    right_command.execute()
+    command.execute()
+    assert robot.x == 1
+    assert robot.y == 0
+    assert robot.direction == SOUTH
+    right_command.execute()
+    command.execute()
+    assert robot.x == 0
+    assert robot.y == 0
+    assert robot.direction == WEST
