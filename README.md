@@ -41,3 +41,8 @@ python robots/main.py --file data/sample.txt
 
 ## Assumptions
 * All coordinates are x,y and width,height.
+
+## Notes
+* Make sure all modules, classes and functions have comments to generate sphinx API documentation.
+* Add tests for main.py explore function.
+* Review to see if can be made more elegant and pythonic.
