@@ -2,7 +2,7 @@
 
 import pytest
 
-from commands import Left, Right, Forward, NORTH, EAST, SOUTH, WEST
+from commands import Left, Right, Forward, NORTH, EAST, SOUTH, WEST, LOST
 from grid import Grid
 from robot import Robot
 
@@ -13,6 +13,11 @@ def grid():
 @pytest.fixture
 def robot():
     return Robot(x=0, y=0, direction=NORTH)
+
+@pytest.fixture
+def lost_robot():
+    return Robot(x=0, y=0, direction=LOST)
+
 
 def test_left_command(grid, robot):
     """Checks the left command rotates correctly."""
@@ -29,6 +34,15 @@ def test_left_command(grid, robot):
     command.execute()
     assert robot.direction == NORTH
 
+
+def test_left_command_for_lost(grid, lost_robot):
+    command = Left(grid=grid, robot=lost_robot)
+    command.execute()
+    assert lost_robot.x == 0
+    assert lost_robot.y == 0
+    assert lost_robot.direction == LOST
+
+
 def test_right_command(grid, robot):
     """Checks the right command rotates correctly."""
 
@@ -44,8 +58,17 @@ def test_right_command(grid, robot):
     command.execute()
     assert robot.direction == NORTH
 
+
+def test_right_command_for_lost(grid, lost_robot):
+    command = Right(grid=grid, robot=lost_robot)
+    command.execute()
+    assert lost_robot.x == 0
+    assert lost_robot.y == 0
+    assert lost_robot.direction == LOST
+
+
 def test_forward_command(grid, robot):
-    """Checks the right command rotates correctly."""
+    """Checks the forward command moves correctly."""
 
     command = Forward(grid=grid, robot=robot)
     command.execute()
