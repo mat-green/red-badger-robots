@@ -47,7 +47,11 @@ class Right(Command):
     """Represents the right rotation command."""
 
     def execute(self):
-        pass
+        current_index = [i for i,_ in enumerate(self.compass) if _ == self.robot.direction][0]
+        new_index = current_index + 1
+        if new_index >= len(self.compass):
+            new_index = 0
+        self.robot.direction = self.compass[new_index]
 
 
 class Forward(Command):
