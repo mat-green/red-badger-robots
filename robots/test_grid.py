@@ -2,7 +2,9 @@
 
 import pytest
 
+from commands import EAST
 from grid import Grid
+from robot import Robot
 
 
 def test_with_no_scents():
@@ -14,3 +16,27 @@ def test_with_scents():
     grid = Grid(width=5, height=3)
     grid.scents = [(2, 2)]
     assert grid.check_for_scent(x=2, y=2) == True
+
+
+def test_not_lost_robot():
+    grid = Grid(width=5, height=3)
+    robot = Robot(x=0, y=0, direction=EAST)
+    assert grid.check_for_lost_robot(robot=robot) == False
+
+
+def test_lost_robot_on_x():
+    grid = Grid(width=5, height=3)
+    robot = Robot(x=6, y=0, direction=EAST)
+    assert grid.check_for_lost_robot(robot=robot) == True
+
+
+def test_lost_robot_on_y():
+    grid = Grid(width=5, height=3)
+    robot = Robot(x=0, y=4, direction=EAST)
+    assert grid.check_for_lost_robot(robot=robot) == True
+
+
+def test_lost_robot_on_x_y():
+    grid = Grid(width=5, height=3)
+    robot = Robot(x=6, y=4, direction=EAST)
+    assert grid.check_for_lost_robot(robot=robot) == True
